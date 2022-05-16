@@ -6,17 +6,17 @@ const NUM_BALLS = 5;
 
 const BG_COLOR = 'BLACK'; //background
 
-const FONT_COLOR = 'BLUE';
+const FONT_COLOR = 'WHITE';
 const FONT_FAMILY = 'impact';
 const FONT_SIZE = '45px';
 
 const PADDLE_RIGHT_COLOR = 'RED';
 const PADDLE_LEFT_COLOR = 'WHITE';
-const PADDLE_WIDTH = 20;
-const PADDLE_HEIGHT = 100;
+const PADDLE_WIDTH = '20';
+const PADDLE_HEIGHT = '100';
 
 const BALL_COLOR = 'WHITE';
-const BALL_RADIUS = 10;
+const BALL_RADIUS = '10';
 const BALL_DELTA_VELOCITY = 0.5;
 const BALL_VELOCITY = 5;
 
@@ -29,38 +29,7 @@ const NET_PADDING = 15;
 const cvs = document.getElementById('pong_canvas');
 const ctx = cvs.getContext('2d');
 
-/* //rectangle fons
-ctx.fillStyle = 'BLACK';
-ctx.fillRect(10, 20, 150, 200);
-
-//cercle
-ctx.fillStyle = 'WHITE';
-ctx.beginPath();
-ctx.arc(60,70,10,0,2*Math.PI);
-ctx.closePath();
-ctx.fill();
-
-//text
-ctx.fillStyle = 'BLUE';
-ctx.font = '45px impact';
-ctx.fillText("Saludos", 100, 200); */
-
-//HELPER CANVAS
-function drawRect(x,y,w,h, color){
-    ctx.fillStyle = color;
-    ctx.fillRect(x,y,w,h,);
-}
-
-function drawCircle(x,y,r, color) {
-    ctx.fillStyle = color;
-    ctx.beginPath();
-    ctx.arc(x,y,r,0,2*Math.PI);
-    ctx.closePath();
-    ctx.fill();
-}
-
-//creamos los obj del juego
-
+//Obj del juego
 //declarem la red
 const net = {
     x: cvs.width/2 - NET_WIDTH/2,
@@ -73,7 +42,7 @@ const net = {
 //bola
 const ball = {
     x: cvs.width/2,
-    y: cvs.height/2 - BALL_RADIUS,
+    y: cvs.height/2 /*- BALL_RADIUS*/,
     radius: BALL_RADIUS,
     speed: BALL_VELOCITY,
     velocityX: BALL_VELOCITY,
@@ -97,14 +66,49 @@ const playerB = {
     color: PADDLE_RIGHT_COLOR,
     score: 0
 }
-const localPlayer = playerA;
-const computer = playerB;
+//definim jugadors
+let localPlayer = playerA;
+let computer = playerB;
 
-function drawText(text,x,y, color=FONT_COLOR, fontSize=FONT_SIZE, fontFamily=FONT_FAMILY){
-    ctx.fillStyle = 'BLUE';
+/* //rectangle fons
+ctx.fillStyle = 'BLACK';
+ctx.fillRect(10, 20, 150, 200);
+
+//cercle
+ctx.fillStyle = 'WHITE';
+ctx.beginPath();
+ctx.arc(60,70,10,0,2*Math.PI);
+ctx.closePath();
+ctx.fill();
+
+//text
+ctx.fillStyle = 'BLUE';
+ctx.font = '45px impact';
+ctx.fillText("Saludos", 200, 200); */
+
+//HELPER CANVAS
+function drawRect(x,y,w,h, color){
+    ctx.fillStyle = color;
+    ctx.fillRect(x, y, w, h);
+}
+
+function drawCircle(x,y,r, color) {
+    ctx.fillStyle = color;
+    ctx.beginPath();
+    ctx.arc(x, y, r, 0,2*Math.PI);
+    ctx.closePath();
+    ctx.fill();
+}
+
+function drawText(text, x, y, color=FONT_COLOR, fontSize=FONT_SIZE, fontFamily=FONT_FAMILY){
+    ctx.fillStyle = color;
     ctx.font = `${fontSize} ${fontFamily}`;
     ctx.fillText(text, x, y);
 }
+
+
+
+
 
 
 //HELPERS PONG
