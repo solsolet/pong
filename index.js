@@ -25,7 +25,7 @@ let currenState = {
 const socket = require('socket.io');
 const io = socket(server);
 
-io.socket.on('connect', onConnect);
+io.sockets.on('connect', onConnect);
 
 // definim i tractem els events entrants
 function onConnect(socket) {
