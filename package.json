@@ -1,0 +1,31 @@
+{
+  "name": "pong",
+  "version": "2.0.0",
+  "description": "Juego Pong Multijugador",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/solsolet/pong.git"
+  },
+  "keywords": [
+    "sd",
+    "juego",
+    "pong"
+  ],
+  "author": "Gemma Sellés",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/solsolet/pong/issues"
+  },
+  "homepage": "https://github.com/solsolet/pong#readme",
+  "dependencies": {
+    "express": "^4.18.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.16"
+  }
+}

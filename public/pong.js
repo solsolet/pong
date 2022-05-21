@@ -42,7 +42,7 @@ const net = {
 //bola
 const ball = {
     x: cvs.width/2,
-    y: cvs.height/2 /*- BALL_RADIUS*/,
+    y: cvs.height/2,
     radius: BALL_RADIUS,
     speed: BALL_VELOCITY,
     velocityX: BALL_VELOCITY,
@@ -67,19 +67,24 @@ const playerB = {
     score: 0
 }
 //definim jugadors
-let localPlayer = playerA;
-let computer = playerB;
+let localPlayer;
+let computer;
+
+function setPlayers(){
+    localPlayer = playerA;
+    computer = playerB;
+}
 
 //HELPER CANVAS
-function drawRect(x,y,w,h, color){
+function drawRect(x, y, w, h, color){
     ctx.fillStyle = color;
     ctx.fillRect(x, y, w, h);
 }
 
-function drawCircle(x,y,r, color) {
+function drawCircle(x, y, r, color) {
     ctx.fillStyle = color;
     ctx.beginPath();
-    ctx.arc(x, y, r, 0,2*Math.PI);
+    ctx.arc(x, y, r, 0, 2*Math.PI);
     ctx.closePath();
     ctx.fill();
 }
@@ -92,7 +97,7 @@ function drawText(text, x, y, color=FONT_COLOR, fontSize=FONT_SIZE, fontFamily=F
 
 //HELPERS PONG
 function clearCanvas(){
-    drawRect(0,0,cvs.width,cvs.height, BG_COLOR);
+    drawRect(0, 0, cvs.width, cvs.height, BG_COLOR);
 }
 
 function drawNet(){
@@ -102,8 +107,8 @@ function drawNet(){
 }
 
 function drawScore() {
-    drawText(localPlayer.score, cvs.width/4, cvs.height/6, 'WHITE');
-    drawText(computer.score, 3*cvs.width/4, cvs.height/6, 'WHITE');
+    drawText(localPlayer.score, 1*cvs.width/4, cvs.height/6);
+    drawText(computer.score, 3*cvs.width/4, cvs.height/6);
 }
 
 function drawPaddle(paddle){
@@ -173,7 +178,7 @@ function update(){
     ball.x += ball.velocityX;
     ball.y += ball.velocityY;
 
-    //IA: actualizamos la posición del ocmputador
+    //IA: actualizamos la posición del computador
     updateComputer();
 
     // si la bola golpea los laterales rebota
@@ -182,7 +187,7 @@ function update(){
     }
 
     //comprobar si la pelota choca contra una pala
-    let whatPlayer = (ball.x < cvs.width/2) ? playerA : playerB;
+    let whatPlayer = ball.x < cvs.width/2 ? playerA : playerB;
     
     if(collision(ball, whatPlayer)){
         //calcular punt de colisió de la Y
@@ -212,11 +217,10 @@ function update(){
 function render() { //codi refactoritzat
     clearCanvas();
     drawNet();
-
     drawScore();
-
     drawPaddle(localPlayer);
     drawPaddle(computer);
+
     //si hemos termiando la partida
     if( isGameOver() ){
         endGame();
@@ -235,12 +239,12 @@ function endGame(){
     stopGameLoop();
 }
 
-let gameLoopId;
-
 function gameLoop(){
     update();
     render();
 }
+
+let gameLoopId;
 
 function stopGameLoop(){
     clearInterval(gameLoopId);
@@ -251,19 +255,9 @@ function initGameLoop(){
 }
 
 function play() {
-    drawBoard();
-    initPaddleMovement();
+    setPlayers();
+    initPaddleMovement();    
     initGameLoop();
-}
-
-function drawBoard(){
-    clearCanvas();
-    drawNet();
-
-    drawScore();
-
-    drawPaddle(localPlayer);
-    drawPaddle(computer);
 }
 
 play();
